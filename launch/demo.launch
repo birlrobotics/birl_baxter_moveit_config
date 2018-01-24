@@ -1,3 +1,4 @@
+<?xml version="1.0"?>
 <launch>
 
   <!-- By default, we do not start a database (it can be large) -->
@@ -36,7 +37,13 @@
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
 
   <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+    <arg name="kinect" default="false" />
+    <arg name="xtion" default="false" />
+    <arg name="camera_link_pose" default="0.15 0.075 0.5 0.0 0.7854 0.0"/>
   <include file="$(find birl_baxter_moveit_config)/launch/move_group.launch">
+    <arg name="kinect" value="$(arg kinect)" />
+    <arg name="xtion" value="$(arg xtion)" />
+    <arg name="camera_link_pose" default="$(arg camera_link_pose)"/>
     <arg name="allow_trajectory_execution" value="true"/>
     <arg name="fake_execution" value="true"/>
     <arg name="info" value="true"/>

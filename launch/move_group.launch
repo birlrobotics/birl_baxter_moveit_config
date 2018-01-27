@@ -1,6 +1,8 @@
 <?xml version="1.0"?>
 <launch>
 
+ <include file="$(find birl_baxter_moveit_config)/launch/planning_context.launch" />
+
   <!-- GDB Debug Option -->
   <arg name="debug" default="false" />
   <arg unless="$(arg debug)" name="launch_prefix" value="" />
@@ -31,15 +33,8 @@
     <arg name="moveit_controller_manager" value="fake" if="$(arg fake_execution)"/>
   </include>
 
-
-  <arg name="kinect" default="false" />
-  <arg name="xtion" default="false" />
-  <arg name="camera_link_pose" default="0.15 0.075 0.5 0.0 0.7854 0.0"/>
   <!-- Sensors Functionality -->
   <include ns="move_group" file="$(find birl_baxter_moveit_config)/launch/sensor_manager.launch.xml" if="$(arg allow_trajectory_execution)">
-    <arg name="kinect" value="$(arg kinect)" />
-    <arg name="xtion" value="$(arg xtion)" />
-    <arg name="camera_link_pose" default="$(arg camera_link_pose)"/>
     <arg name="moveit_sensor_manager" value="baxter" /> 
   </include>
 
@@ -62,8 +57,8 @@
 				      move_group/MoveGroupQueryPlannersService
 				      move_group/MoveGroupStateValidationService
 				      move_group/MoveGroupGetPlanningSceneService
+				      move_group/ClearOctomapService
 				      " />
-
 
     <!-- Publish the planning scene of the physical robot so that rviz plugin can know actual robot -->
     <param name="planning_scene_monitor/publish_planning_scene" value="$(arg publish_monitored_planning_scene)" />

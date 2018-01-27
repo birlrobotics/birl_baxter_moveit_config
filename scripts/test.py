@@ -75,6 +75,7 @@ def move_group_python_interface_tutorial():
   ## arm.  This interface can be used to plan and execute motions on the left
   ## arm.
   group = moveit_commander.MoveGroupCommander("right_arm")
+  
 
 
   ## We create this DisplayTrajectory publisher which is used below to publish
@@ -107,6 +108,20 @@ def move_group_python_interface_tutorial():
   print robot.get_current_state()
   print "============"
 
+  # Set the reference frame for pose targets
+  reference_frame = 'base'
+  # Set the right arm reference frame accordingly
+  group.set_pose_reference_frame(reference_frame)
+  
+  # Allow replanning to increase the odds of a solution
+  group.allow_replanning(True)
+  
+  # Allow some leeway in position (meters) and orientation (radians)
+  group.set_goal_position_tolerance(0.05)
+  group.set_goal_orientation_tolerance(0.1)
+  
+  # Get the name of the end-effector link
+  end_effector_link = group.get_end_effector_link()
 
   ## Planning to a Pose goal
   ## ^^^^^^^^^^^^^^^^^^^^^^^
@@ -114,59 +129,26 @@ def move_group_python_interface_tutorial():
   ## end-effector
   print "============ Generating plan 1"
   pose_target = geometry_msgs.msg.Pose()
-  pose_target.orientation.w = 0.0171719685224
-  pose_target.orientation.x = -0.99309332868
-  pose_target.orientation.y = -0.114493381304
-  pose_target.orientation.z = -0.0190270771749
-  pose_target.position.x = 0.607157402657
-  pose_target.position.y = -0.172825390916
-  pose_target.position.z = 0.2092603354757
+  pose_target.orientation.w = 0.20149958079 
+  pose_target.orientation.x = 0.0701981898529
+  pose_target.orientation.y = -0.66496014039
+  pose_target.orientation.z = -0.715750057475
+  pose_target.position.x = 0.380451105904
+  pose_target.position.y = -0.301373844018
+  pose_target.position.z = 0.68235969972
+  
+  # Set the start state to the current state
   group.set_start_state_to_current_state()
-  group.set_pose_target(pose_target)
+  # Set the goal pose of the end effector to the stored pose
+  group.set_pose_target(pose_target, end_effector_link)
   
-  ## Now, we call the planner to compute the plan
-  ## and visualize it if successful
-  ## Note that we are just planning, not asking move_group 
-  ## to actually move the robot
-  plan1 = group.plan()
+  # Plan the trajectory to the goal
+  traj = group.plan()
   
-  
+  # Execute the planned trajectory
+  group.execute(traj)
+  rospy.sleep(1)
 
-  print "============ Waiting while RVIZ displays plan1..."
-  
- 
-  ## You can ask RVIZ to visualize a plan (aka trajectory) for you.  But the
-  ## group.plan() method does this automatically so this is not that useful
-  ## here (it just displays the same trajectory again).
-  print "============ Visualizing plan1"
-  display_trajectory = moveit_msgs.msg.DisplayTrajectory()
-
-  display_trajectory.trajectory_start = robot.get_current_state()
-  display_trajectory.trajectory.append(plan1)
-  display_trajectory_publisher.publish(display_trajectory);
-
-  print "============ Waiting while plan1 is visualized (again)..."
-  rospy.sleep(5)
-  group.go(wait=True)
-  ipdb.set_trace()
-  group.clear_pose_targets()
-
-
-  ## Moving to a pose goal
-  ## ^^^^^^^^^^^^^^^^^^^^^
-  ##
-  ## Moving to a pose goal is similar to the step above
-  ## except we now use the go() function. Note that
-  ## the pose goal we had set earlier is still active 
-  ## and so the robot will try to move to that goal. We will
-  ## not use that function in this tutorial since it is 
-  ## a blocking function and requires a controller to be active
-  ## and report success on execution of a trajectory.
-
-  # Uncomment below line when working with a real robot
-  # group.go(wait=True)
-
-  
   ## Cartesian Paths
   ## ^^^^^^^^^^^^^^^
   ## You can plan a cartesian path directly by specifying a list of waypoints 
@@ -219,16 +201,16 @@ def move_group_python_interface_tutorial():
   display_trajectory_publisher.publish(display_trajectory);
   rospy.sleep(4)
   print "============ Waiting while plan3 is visualized (again)..."
-  group.go(wait=True)
-  
-  
-  
-
- 
-  ## Adding/Removing Objects and Attaching/Detaching Objects
-  ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  ## First, we will define the collision object message
-  collision_object = moveit_msgs.msg.CollisionObject()
+  group.execute(plan3)
+#  
+#  
+#  
+#
+# 
+#  ## Adding/Removing Objects and Attaching/Detaching Objects
+#  ## ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+#  ## First, we will define the collision object message
+#  collision_object = moveit_msgs.msg.CollisionObject()
 
 
 

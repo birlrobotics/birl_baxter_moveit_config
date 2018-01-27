@@ -1,24 +1,35 @@
 <?xml version="1.0"?>
 <launch>
+
+  <!-- By default, we do not start a database (it can be large) -->
+  <arg name="db" default="false" />
+
+  <!-- By default, we are not in debug mode -->
+  <arg name="debug" default="false" />
+  <arg name="allow_trajectory_execution" default="true"/>
+
   <arg name="config" default="true"/>
-
+  
+  <!-- Load the URDF, SRDF and other .yaml configuration files on the param server -->
   <include file="$(find birl_baxter_moveit_config)/launch/planning_context.launch">
+    <arg name="load_robot_description" value="false"/>
   </include>
 
-  <arg name="kinect" default="false" />
-  <arg name="xtion" default="false" />
-  <arg name="camera_link_pose" default="0.15 0.075 0.5 0.0 0.7854 0.0"/>
 
-  <include file="$(find baxter_moveit_config)/launch/move_group.launch">
-    <arg name="kinect" value="$(arg kinect)" />
-    <arg name="xtion" value="$(arg xtion)" />
-    <arg name="camera_link_pose" default="$(arg camera_link_pose)"/>
+  <!-- Run the main MoveIt executable without trajectory execution (we do not have controllers configured by default) -->
+  <include file="$(find birl_baxter_moveit_config)/launch/move_group.launch">
     <arg name="allow_trajectory_execution" value="true"/>
+
   </include>
 
-
-<include file="$(find birl_baxter_moveit_config)/launch/moveit_rviz.launch">
+  <!-- Run Rviz and load the default config to see the state of the move_group node -->
+  <include file="$(find birl_baxter_moveit_config)/launch/moveit_rviz.launch">
     <arg name="config" value="$(arg config)" />
-  </include>
-  </launch>
 
+  </include>
+
+  <!-- If database loading was enabled, start mongodb as well -->
+  <include file="$(find birl_baxter_moveit_config)/launch/default_warehouse_db.launch" if="$(arg db)">
+  </include>
+
+</launch>

@@ -9,7 +9,7 @@ Panels:
         - /MotionPlanning1/Planning Request1
         - /MotionPlanning1/Planned Path1
       Splitter Ratio: 0.74256
-    Tree Height: 359
+    Tree Height: 372
   - Class: rviz/Help
     Name: Help
   - Class: rviz/Views
@@ -368,10 +368,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          world:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
         Loop Animation: false
         Robot Alpha: 0.5
         Robot Color: 150; 50; 150
@@ -395,7 +391,7 @@ Visualization Manager:
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
         Planning Group: right_arm
-        Query Goal State: true
+        Query Goal State: false
         Query Start State: false
         Show Workspace: false
         Start State Alpha: 1
@@ -719,10 +715,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          world:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
         Robot Alpha: 0.5
         Show Robot Collision: false
         Show Robot Visual: true
@@ -732,7 +724,7 @@ Visualization Manager:
       Marker Topic: visualization_marker
       Name: Marker
       Namespaces:
-        traj_point: true
+        {}
       Queue Size: 100
       Value: true
   Enabled: true
@@ -750,7 +742,7 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz/XYOrbit
-      Distance: 3.15804
+      Distance: 4.59664
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.06
         Stereo Focal Distance: 1
@@ -762,15 +754,15 @@ Visualization Manager:
         Z: 2.23518e-07
       Name: Current View
       Near Clip Distance: 0.01
-      Pitch: 0.104797
+      Pitch: 0.0447963
       Target Frame: base
       Value: XYOrbit (rviz)
-      Yaw: 5.80994
+      Yaw: 4.82986
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1034
+  Height: 1059
   Help:
     collapsed: false
   Hide Left Dock: false
@@ -779,9 +771,9 @@ Window Geometry:
     collapsed: false
   MotionPlanning - Slider:
     collapsed: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000002a2000003c6fc0200000007fb000000100044006900730070006c0061007900730100000028000001fc000000dd00fffffffb0000000800480065006c00700000000342000000bb0000007600fffffffb0000000a0056006900650077007300000003b0000000b0000000b000fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb0000002e004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d00200053006c00690064006500720000000000ffffffff0000004a00fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e0067010000022a000001c4000001b900ffffff0000047c000003c600000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd0000000100000000000002a2000003dffc0200000007fb000000100044006900730070006c006100790073010000002800000209000000dd00fffffffb0000000800480065006c00700000000342000000bb0000007600fffffffb0000000a0056006900650077007300000003b0000000b0000000b000fffffffb0000000c00430061006d00650072006100000002ff000001610000000000000000fb0000001e004d006f00740069006f006e00200050006c0061006e006e0069006e00670100000374000001890000000000000000fb0000002e004d006f00740069006f006e0050006c0061006e006e0069006e00670020002d00200053006c00690064006500720000000000ffffffff0000004a00fffffffb0000001c004d006f00740069006f006e0050006c0061006e006e0069006e00670100000237000001d0000001b900ffffff0000049f000003df00000001000000020000000100000002fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Views:
     collapsed: false
-  Width: 1828
-  X: 74
-  Y: 12
+  Width: 1863
+  X: 57
+  Y: 21

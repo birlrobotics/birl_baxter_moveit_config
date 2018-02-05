@@ -55,27 +55,20 @@ Just launch this command
 ### Connect to simulation robot
 Start Baxter simulation
 
-    roslaunch baxter_gazebo baxter_world.launch
+   ` roslaunch birl_baxter_description baxter_ft_gazebo.launch`
 
 
 Verify that the robot is enabled from an RSDK terminal session, ex: 
 
-    $ rosrun baxter_tools enable_robot.py -e
-Start the joint trajectory controller, ex: 
- 
-
-    $ rosrun baxter_interface joint_trajectory_action_server.py
- Remapping `/robot/joint_states` to  `joint_states`
-
-    $ rosrun birl_baxter_moveit_config joint_states_remap_topic.py
+   ` $ rosrun baxter_tools enable_robot.py -e`
    
    Start MoveIt
    
-    roslaunch birl_baxter_moveit_config birl_baxter_gripper.launch
+   ` roslaunch birl_baxter_moveit_config birl_baxter_gripper.launch`
 
    
 ### Connect to real robot 
 Repeat all the command above except start Baxter simulation instead of getting started with
 
-    ./baxter.sh
+  `  ./baxter.sh`
 

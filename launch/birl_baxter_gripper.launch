@@ -31,5 +31,10 @@
   <!-- If database loading was enabled, start mongodb as well -->
   <include file="$(find birl_baxter_moveit_config)/launch/default_warehouse_db.launch" if="$(arg db)">
   </include>
-
+  
+ <!-- remapping joint_states to /robot/joint_states-->
+ <node name="joint_remap" pkg="birl_baxter_moveit_config" type="joint_states_remap_topic.py" respawn="true" />
+ 
+ <!-- launch joint interface-->
+<node name="joint_trajectory_action_server" pkg="baxter_interface" type="joint_trajectory_action_server.py" respawn="true" />
 </launch>
